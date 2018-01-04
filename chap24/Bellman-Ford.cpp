@@ -32,7 +32,7 @@ public:
 bool Graph_SP::BellmanFord(int Start){
 
     InitializeSingleSource(Start);
-
+    Start+=1;
     std::cout << "predecessor[]:\n";
     PrintDataArray(predecessor);
     std::cout << "distance[]:\n";
@@ -40,19 +40,21 @@ bool Graph_SP::BellmanFord(int Start){
     cout << endl;
     for (int i = 0; i < num_vertex-1; i++) {                // |V-1|次的iteration
         // for each edge belonging to E(G)
-        for (int j = 0 ; j < num_vertex; j++) {             // 把AdjList最外層的vector走一遍
+        for (int tmp_j = Start ; tmp_j < num_vertex+Start; tmp_j++) {// 把AdjList最外層的vector走一遍
+            int j = tmp_j % num_vertex;
+            //cout << j <<endl;
             for (std::list<std::pair<int,int> >::iterator itr = AdjList[j].begin();
                  itr != AdjList[j].end(); itr++) {          // 各個vector中, 所有edge走一遍
                 Relax(j, (*itr).first, (*itr).second);
                 }
-
         }
-        std::cout << "Loop: " << i <<std::endl;
+        std::cout << "Loop: " << i+1 <<std::endl;
         std::cout << "predecessor[]:\n";
         PrintDataArray(predecessor);
         std::cout << "distance[]:\n";
         PrintDataArray(distance);
         cout << endl;
+
     }
 
     // check if there is negative cycle
@@ -75,6 +77,9 @@ void Graph_SP::PrintDataArray(std::vector<int> array){
         std::cout << std::setw(4) << i;
     std::cout << std::endl;
     for (int i = 0; i < num_vertex; i++)
+        if(array[i]>900)
+            printf("   ∞");
+        else
         std::cout << std::setw(4) << array[i];
     std::cout << std::endl;
 }

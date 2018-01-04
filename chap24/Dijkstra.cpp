@@ -174,7 +174,7 @@ void Graph_SP::Dijkstra(int Start){
             Relax(u, (*itr).first, (*itr).second);
             minQueue.DecreaseKey((*itr).first, distance[(*itr).first]);
         }
-        cout << "Loop: " << cnt++;
+        cout << "Loop: " << ++cnt;
         std::cout << "\nprint predecessor:\n";
         PrintDataArray(predecessor);
         std::cout << "print distance:\n";

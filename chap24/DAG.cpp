@@ -69,7 +69,7 @@ void Graph_SP::DFSVisit_TS(int *array, int *color, int *discover,
     for (std::list<std::pair<int,int>>::iterator itr = AdjList[vertex].begin();
          itr != AdjList[vertex].end(); itr++) {
         if (color[(*itr).first] == 0) {
-            predecessor[(*itr).first] = vertex;
+            //predecessor[(*itr).first] = vertex;
             DFSVisit_TS(array, color, discover, finish, (*itr).first, time, count);
         }
     }
@@ -95,7 +95,7 @@ void Graph_SP::DAG_SP(int Start){
              itr != AdjList[v].end(); itr++) {
             Relax(v, (*itr).first, (*itr).second);
         }
-        std::cout << "Loop: " << i <<std::endl;
+        std::cout << "Loop: " << i+1 <<std::endl;
         std::cout << "predecessor[]:\n";
         PrintDataArray(predecessor);
         std::cout << "distance[]:\n";
